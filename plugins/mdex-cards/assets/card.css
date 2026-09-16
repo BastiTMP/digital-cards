@@ -1,0 +1,57 @@
+:root {
+  --bg:#0b0c0e; --surface:#17191d; --line:#2b2e34; --text:#fff;
+  --muted:#aeb3bc; --accent:#e30613; --radius:22px;
+}
+* { box-sizing:border-box; }
+html { background:var(--bg); }
+body {
+  margin:0; min-height:100vh; padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  background:linear-gradient(180deg,#0b0c0e,#13151a); color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+a { text-decoration:none; color:inherit; }
+.card { width:min(100%,520px); margin:0 auto; padding:24px 0 36px; color:var(--text); }
+.hero { text-align:center; padding:6px 12px 24px; }
+.brand { font-size:18px; font-weight:900; letter-spacing:.14em; margin-bottom:24px; }
+.brand span { font-weight:500; color:var(--muted); }
+.brand-logo { display:block; width:min(250px,74%)!important; height:auto!important; max-height:90px; object-fit:contain; margin:0 auto 26px; padding:10px 16px!important; background:#fff; border-radius:14px; }
+.card img.portrait { display:block!important; width:148px!important; height:148px!important; min-width:148px!important; min-height:148px!important; max-width:148px!important; max-height:148px!important; padding:0!important; border-radius:50%!important; object-fit:cover!important; object-position:center center!important; margin:0 auto 19px!important; border:4px solid #24272d!important; box-shadow:0 18px 50px #0008; }
+.placeholder { display:grid; place-items:center; background:linear-gradient(135deg,#2b2e34,#15171b); font-size:48px; font-weight:800; }
+.card .hero h1 { color:#fff!important; font-size:32px; line-height:1.06; margin:0 0 8px; letter-spacing:-.03em; }
+.role,.company { margin:4px 0; color:var(--muted); font-size:16px; }
+.welcome { margin:-8px 14px 20px; color:var(--muted); text-align:center; line-height:1.45; }
+.owner-intro { margin:-4px 8px 14px; text-align:center; }
+.owner-intro span { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.12em; }
+.owner-intro h2 { color:#fff!important; margin:7px 0 5px; font-size:22px; }
+.owner-intro p { margin:0; color:var(--muted); font-size:14px; line-height:1.4; }
+.card .primary { display:flex; justify-content:center; align-items:center; min-height:58px; border-radius:17px; background:var(--accent); color:#fff!important; font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; box-shadow:0 12px 28px #e3061340; }
+.primary:active,.quick a:active,.links a:active,.links button:active { transform:scale(.98); }
+.quick { display:grid; grid-template-columns:repeat(auto-fit,minmax(78px,1fr)); gap:9px; margin:14px 0; }
+.card .quick a { color:#fff!important; background:var(--surface); border:1px solid var(--line); border-radius:16px; min-height:86px; display:flex; flex-direction:column; gap:9px; align-items:center; justify-content:center; font-size:12px; }
+.quick b { width:32px; height:32px; border-radius:50%; background:#25282e; display:grid; place-items:center; font-size:13px; color:#fff; }
+.links { overflow:hidden; border-radius:var(--radius); border:1px solid var(--line); background:var(--surface); }
+.card .links a,.card .links button { appearance:none; width:100%; border:0; border-bottom:1px solid var(--line); background:transparent; color:#fff!important; font:inherit; text-align:left; padding:18px 20px; display:flex; justify-content:space-between; cursor:pointer; }
+.links>:last-child { border-bottom:0; }
+.links span { font-size:24px; color:var(--muted); line-height:18px; }
+.qr { text-align:center; margin:22px 0 0; padding:26px 18px; background:#fff; color:#111; border-radius:var(--radius); }
+.owner-view .qr { margin-top:0; margin-bottom:14px; }
+.card .qr h2 { color:#111!important; font-size:18px; margin:0 0 15px; }
+.qr img { width:min(100%,260px); height:auto; display:block; margin:auto; }
+.qr p { font-size:13px; margin:12px 0 0; color:#555; }
+.install-help { position:fixed; z-index:999999; left:16px; right:16px; bottom:16px; max-width:488px; margin:auto; padding:24px; background:#fff; color:#101114; border-radius:22px; box-shadow:0 20px 70px #000b; }
+.install-help[hidden] { display:none!important; }
+.install-help h2 { color:#101114!important; margin:0 30px 12px 0; }
+.install-help p { margin:0; line-height:1.5; }
+.install-help .close { position:absolute; right:14px; top:10px; border:0; background:none; color:#101114; font-size:30px; cursor:pointer; }
+.android { display:none; }
+footer { text-align:center; color:var(--muted); font-size:12px; line-height:1.5; padding:24px 0; }
+#toast { position:fixed; left:50%; bottom:26px; transform:translate(-50%,30px); opacity:0; background:#fff; color:#111; border-radius:30px; padding:12px 18px; transition:.2s; pointer-events:none; font-size:14px; font-weight:700; z-index:1000000; }
+#toast.show { opacity:1; transform:translate(-50%,0); }
+@media(max-width:390px) {
+  body { padding-left:11px; padding-right:11px; }
+  .card .hero h1 { font-size:29px; }
+  .quick { gap:6px; }
+  .quick a { min-height:80px; }
+  .quick span { font-size:11px; }
+}
+@media(display-mode:standalone) { .card { padding-top:18px; } }
