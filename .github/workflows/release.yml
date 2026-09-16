@@ -1,0 +1,35 @@
+name: Build WordPress release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build plugin ZIP files
+        run: |
+          mkdir -p dist
+          cd plugins
+          zip -qr ../dist/moeller-cards.zip moeller-cards
+          zip -qr ../dist/tmp-cards.zip tmp-cards
+          zip -qr ../dist/mdex-cards.zip mdex-cards
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \\
+            dist/moeller-cards.zip \\
+            dist/tmp-cards.zip \\
+            dist/mdex-cards.zip \\
+            --title "Digital Cards ${GITHUB_REF_NAME}" \\
+            --generate-notes
