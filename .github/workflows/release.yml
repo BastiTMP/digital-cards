@@ -27,9 +27,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \\
-            dist/moeller-cards.zip \\
-            dist/tmp-cards.zip \\
-            dist/mdex-cards.zip \\
-            --title "Digital Cards ${GITHUB_REF_NAME}" \\
+          gh release create "${GITHUB_REF_NAME}" \
+            dist/moeller-cards.zip \
+            dist/tmp-cards.zip \
+            dist/mdex-cards.zip \
+            --title "Digital Cards ${GITHUB_REF_NAME}" \
             --generate-notes
