@@ -1,7 +1,27 @@
+[main 24c594f] Initial digital cards release
+ Date: Wed Sep 16 15:11:13 2026 +0200
+ 15 files changed, 1654 insertions(+)
+ create mode 100644 .github/workflows/release.yml
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 plugins/mdex-cards/assets/card.css
+ create mode 100644 plugins/mdex-cards/assets/card.js
+ create mode 100644 plugins/mdex-cards/includes/class-bw-github-updater.php
+ create mode 100644 plugins/mdex-cards/mdex-cards.php
+ create mode 100644 plugins/moeller-cards/assets/card.css
+ create mode 100644 plugins/moeller-cards/assets/card.js
+ create mode 100644 plugins/moeller-cards/includes/class-bw-github-updater.php
+ create mode 100644 plugins/moeller-cards/moeller-cards.php
+ create mode 100644 plugins/tmp-cards/assets/card.css
+ create mode 100644 plugins/tmp-cards/assets/card.js
+ create mode 100644 plugins/tmp-cards/includes/class-bw-github-updater.php
+ create mode 100644 plugins/tmp-cards/tmp-cards.php
 name: Build WordPress release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
@@ -27,9 +47,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            RELEASE_TAG="${GITHUB_REF_NAME}"
+          else
+            RELEASE_TAG="v1.0.0"
+            if gh release view "${RELEASE_TAG}" >/dev/null 2>&1; then
+              echo "${RELEASE_TAG} exists already; nothing to publish."
+              exit 0
+            fi
+          fi
+
+          gh release create "${RELEASE_TAG}" \
+            --target "${GITHUB_SHA}" \
             dist/moeller-cards.zip \
             dist/tmp-cards.zip \
             dist/mdex-cards.zip \
-            --title "Digital Cards ${GITHUB_REF_NAME}" \
+            --title "Digital Cards ${RELEASE_TAG}" \
             --generate-notes
